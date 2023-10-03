@@ -8,6 +8,7 @@ namespace ProductCrud_MVC.Models
         SqlCommand cmd;
         SqlDataReader dr;
         IConfiguration configuration;
+       
         public ProductCrud(IConfiguration configuration)
         {
             this.configuration = configuration;
@@ -57,6 +58,7 @@ namespace ProductCrud_MVC.Models
                     prod.Cid = Convert.ToInt32(dr["cid"]);
                     prod.Cname = dr["cname"].ToString();
                     
+                    
                 }
             }
             con.Close();
@@ -105,5 +107,32 @@ namespace ProductCrud_MVC.Models
             return result;
 
         }
+
+        //public Cart GetCartDetails(int id )
+        //{
+        //    Cart cart = new Cart();
+        //    string qry = "Select * Product where prodid=@id";
+        //    cmd = new SqlCommand(qry, con);
+        //    cmd.Parameters.AddWithValue("@prodid", id);
+        //    con.Open();
+        //    dr = cmd.ExecuteReader();
+        //    if (dr.HasRows)
+        //    {
+        //        while (dr.Read())
+        //        {
+
+        //            cart.ProdName = dr["prodname"].ToString();
+        //            cart.Userid = Convert.ToInt32(dr["userid"]);
+                  
+                    
+        //            cart.Price = Convert.ToInt32(dr["price"]);
+        //            cart.Imageurl = dr["imageurl"].ToString();
+                   
+
+        //        }
+        //    }
+        //    con.Close();
+        //    return prod;
+        //}
     }
 }

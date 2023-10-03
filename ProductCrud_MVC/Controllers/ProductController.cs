@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using NuGet.Packaging.Signing;
 using ProductCrud_MVC.Models;
+using System.Data;
 
 namespace ProductCrud_MVC.Controllers
 {
@@ -9,14 +11,20 @@ namespace ProductCrud_MVC.Controllers
         IConfiguration configuration;
         CategoryCrud catcrud;
         ProductCrud prodcrud;
+        UsersCrud usercrud;
         private Microsoft.AspNetCore.Hosting.IHostingEnvironment env;
+        
         public ProductController(IConfiguration configuration, Microsoft.AspNetCore.Hosting.IHostingEnvironment env)
         {
             this.configuration = configuration;
             catcrud = new CategoryCrud(this.configuration);
             prodcrud = new ProductCrud(this.configuration);
+            usercrud = new UsersCrud(this.configuration);
             this.env = env;
-        }
+            
+
+        }   
+             
 
         // GET: ProductController
         public ActionResult Index()
@@ -144,5 +152,87 @@ namespace ProductCrud_MVC.Controllers
                 return View();
             }
         }
+        // GET: UsersController/Register
+        public ActionResult Register()
+        {
+            return View();
+        }
+
+        // POST: UsersController/Register
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Register(Users users)
+        {
+            try
+            {
+                var result = usercrud.AddUsers(users);
+                if (result >= 1)
+                    return RedirectToAction(nameof(Login));
+                else 
+                return View();
+                
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
+        // GET: UsersController/Login/5
+        public ActionResult Login(int id)
+        {
+            return View();
+        }
+
+        // POST: UsersController/Login/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Login(Users user)
+        {
+            try
+            {
+                
+                var model = usercrud.GetEmailPassword(user.Email, user.Password);
+                if(model.Uid > 0)
+                {
+                    HttpContext.Session.SetString("roleid", model.Roleid.ToString());
+                    HttpContext.Session.SetString("uid", model.Uid.ToString());
+                    HttpContext.Session.SetString("email", model.Email);
+                    if (model.Roleid == 1)
+                    {
+                        return RedirectToAction(nameof(Index));
+                    }
+                    else if (model.Roleid == 2)
+                    {
+                        return this.RedirectToAction("ProductList", "UserProduct");
+                    }
+                    else
+                    {
+                        ViewBag.ErrorMessage = "Invalid Email and Password.";
+                        return View();
+                    }
+
+                }
+                else
+                {
+                    ViewBag.ErrorMessage = "Invalid Email and Password.";
+                    return View();
+                }
+
+            }
+            catch (Exception ex)
+            {
+                ViewBag.ErrorMessage = "Invalid Email and Password.";
+                return View();
+            }
+        }
+        // GET: UsersController/Logout/5
+        public ActionResult Logout(int id)
+        {
+            HttpContext.Session.Clear();
+            return RedirectToAction(nameof(Login));
+        }
+
+        
     }
 }

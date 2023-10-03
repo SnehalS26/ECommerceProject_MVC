@@ -1,0 +1,115 @@
+﻿@model ProductCrud_MVC.Models.Product
+
+@{
+    ViewData["Title"] = "SinglePage";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-4">
+           <img src="@Url.Content(Model.Imageurl)" height="400" width="400">
+           <br />
+            @*<span><b>Name: @Model.Name</b></span> <br />*@
+            <br /><br />
+            <div>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <a href="/UserProduct/AddToCart/@Model.Id" class="btn btn-primary">Add To Cart</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <a href="/Order/Orders/@Model.Id" class="btn btn-warning">Buy now</a> <br />
+            </div>
+        </div>
+        
+        <div class="col-md-8 scroll">
+            <div>
+                <h5><b>Name: @Model.Name</b></h5> <br />
+                <h6>Price : <span><b><i class="fa fa-inr" aria-hidden="true"></i>@Model.Price</b></span></h6><br />
+                <button type="button" class="btn btn-success btn-sm">4.1<i class="fa fa-star" aria-hidden="true"></i></button> 74 Ratings &  15 Reviews
+
+            </div>
+            <br />
+            <div class="offer">
+               
+                <h5>Available offers</h5>
+                <ul>
+                    <li>
+                        <span><b><i class="fa fa-tags" aria-hidden="true"></i> Special Price</b></span><span> Get extra <i class="fa fa-inr" aria-hidden="true"></i>2260 off (price inclusive of cashback/coupon)</span>
+                        <span class="body" style="color:blue"> T&C</span>
+                    </li>
+                    <li>
+                        <span><b><i class="fa fa-tags" aria-hidden="true"></i> Combo Offer</b></span><span> Buy 2 items save 5%; Buy 3 or more save 10%</span><span class="body" style="color:blue"> T&C</span>
+                    </li>
+                    <li>
+                        <span><b><i class="fa fa-tags" aria-hidden="true"></i> Bank Offer</b></span><span> 5% Cashback on Flipkart Axix Bank Card</span><span class="body" style="color:blue"> T&C</span>
+                    </li>
+                </ul>
+                <br /><br />
+                <div class="delivery" style="border-block: dashed;">
+                    <br />
+                        <h5>Delivery Services</h5>
+                        <h6>View available services for your pincode</h6>
+                        <div class="input-group mb-3" style="width:280px">
+                            <input type="text" class="form-control" placeholder="Pin Code" aria-label="Pin Code" aria-describedby="button-addon2">
+                            <button type="button" class="btn btn-primary">Search</button>
+                        </div><br />
+                        <div class="row">
+                            <div class="col-md-1">
+                                <i class="fa fa-truck fa-3x" aria-hidden="true"></i>
+                            </div>
+                            <div class="col-md-6">
+                                <h6>Standard Delivery</h6>
+                                <ul>
+                                    <li>
+                                        COD may be available*
+                                    </li>
+                                    <li>
+                                        Free shipping on order above 21
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-1">
+                                <i class="fa fa-fast-forward fa-3x" aria-hidden="true"></i>
+                            </div>
+                            <div class="col-md-6">
+                                <h6>Express Delivery available</h6>
+                                <ul>
+                                    <li>
+                                        Please enter a pincode to check availability of express delivery at your location
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-1">
+                                <i class="fa fa-gift fa-3x" aria-hidden="true"></i>
+                            </div>
+                            <div class="col-md-6">
+                                <h6>Express Store Pickup available</h6>
+                                <ul>
+                                    <li>
+                                        Please select size to see availability of this product at your nearest store
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-1">
+                                <i class="fa fa-exchange fa-3x" aria-hidden="true"></i>
+                            </div>
+                            <div class="col-md-6">
+                                <h6>Return or exchange not applicable for this item</h6>
+                                <ul>
+                                    <li>
+                                        We do not accept return or exchange for this item.
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                
+               
+            </div>
+        </div>
+        
+    </div>
+</div>

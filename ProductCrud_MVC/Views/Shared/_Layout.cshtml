@@ -5,14 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - ProductCrud_MVC</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/ProductCrud_MVC.styles.css" asp-append-version="true" />
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm border-bottom box-shadow mb-3">
             <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">ProductCrud_MVC</a>
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
+                    <img src="~/images/logo.jfif" height="50" />
+                </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -20,31 +23,139 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>                           
                         </li>
-                        <li class="nav-item">
+                        @*<li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
+                        </li>*@
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Category" asp-action="Index">Category</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Product" asp-action="Index">Product</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="ContactUs">Contact</a>
                         </li>
                     </ul>
-                </div>
+                        @if(httpContextAccessor.HttpContext.Session.GetString("roleid") == "1")
+                        {
+                        <ul class="navbar-nav flex-grow-1">
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Category" asp-action="Index">Category</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Product" asp-action="Index">Product</a>
+                            </li>
+                            </ul>
+                            
+                        }
+                        @if (httpContextAccessor.HttpContext.Session.GetString("roleid") == "2")
+                        {
+                        <ul class="navbar-nav ml-auto">
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="UserProduct" asp-action="ViewCart"><i class="fa fa-shopping-cart fa-2x" aria-hidden="true"></i></a>                               
+                            </li>
+                            @*<li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Order" asp-action="ConfirmOrders">Cancel</a>
+                            </li>*@
+                            </ul>
+                            
+                           @* <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="UserProduct" asp-action="ProductList">Product List</a>
+                            </li>*@                                                      
+                        }
+                        
+
+                   
+                        <ul class="navbar-nav ml-auto">
+                            
+                        @if (String.IsNullOrEmpty(httpContextAccessor.HttpContext.Session.GetString("uid")))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Product" asp-action="Register">Register</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Product" asp-action="Login"><i class="fa fa-sign-in" aria-hidden="true"></i> Login</a>
+                            </li>
+                        }
+                        @if (!String.IsNullOrEmpty(httpContextAccessor.HttpContext.Session.GetString("uid")))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area=""><i class="fa fa-user-circle-o" aria-hidden="true"></i> Welcome @httpContextAccessor.HttpContext.Session.GetString("email")</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Product" asp-action="Logout"><i class="fa fa-sign-out" aria-hidden="true"></i> Logout</a>
+                            </li>
+                        }
+                        
+                        </ul>                                           
+                </div>              
             </div>
         </nav>
     </header>
+    
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
+    <footer class="footer" style="background-color:#AAA6B0 ; height:255px">
         <div class="container">
-            &copy; 2023 - ProductCrud_MVC - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            <div class="row" style="padding-block:30px">
+                <div class="col-md-3 foot">
+                    <h4>About</h4>
+                    <ul typeof="none">
+                        <li>Contact Us</li>
+                        <li>About Us</li>
+                        <li>Careers</li>                       
+                        <li>Press</li>
+                       
+                    </ul>
+                </div>
+
+                <div class="col-md-3 foot">
+                    <h4>Help</h4>
+                    <ul typeof="none">
+                        <li>
+                            Payments
+                        </li>
+                        <li>
+                            Shipping
+                        </li>
+                        <li>
+                            Cancellations & returns
+                        </li>
+                        <li>
+                            FAQ
+                        </li>
+                        
+                    </ul>
+                </div>
+
+                <div class="col-md-3 foot">
+                    <h4>Social</h4>
+                    <ul>
+                        <li>
+                            <a href="#"><i class="fa fa-facebook-official" aria-hidden="true"></i> Facebook</a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i> twitter</a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i> Instagram</a>
+                        </li>
+                       <li>
+                            <a href="#"><i class="fa fa-whatsapp" aria-hidden="true"></i> Whatsapp</a>
+                       </li>
+                       
+                        
+                    </ul>
+                </div>
+
+                <div class="col-md-3 foot">
+                    <h4>Mail us</h4>
+                    <a href="#"><i class="fa fa-envelope" aria-hidden="true"></i> abc11@gmail.com</a>
+                     <br />
+                    Ganga Vihar, Andheri West, Mumbai,
+                    <br />Maharashtra 400058
+                </div>
+            </div>
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>

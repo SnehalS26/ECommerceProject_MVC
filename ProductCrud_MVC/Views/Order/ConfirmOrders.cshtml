@@ -1,0 +1,48 @@
+﻿@model ProductCrud_MVC.Models.Product
+
+@{
+    ViewData["Title"] = "ConfirmOrders";
+}
+
+<h1>ConfirmOrders</h1>
+
+<h4>Product</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group mb-3">
+               
+                <input asp-for="Id" class="form-control" type="hidden"/>
+                
+            </div>
+            <div class="form-group mb-3">
+                <label asp-for="Name" class="control-label"></label>
+                <span><h5><b>Name: @Model.Name</b></h5></span>
+            </div>
+            <div class="form-group mb-3">
+                <label asp-for="Price" class="control-label"></label>
+                <h6><span><b><i class="fa fa-inr" aria-hidden="true"></i>@Model.Price</b></span></h6>
+            </div>
+            <div class="form-group">               
+                <img src="@Url.Content(Model.Imageurl)" height="150" width="200" />               
+            </div>
+            
+            <div class="form-group mb-3">
+                <label asp-for="Quantity" class="control-label"></label>
+                <input asp-for="Quantity" class="form-control" type="number" style="10%"/>
+                
+            </div>
+            
+            <div class="form-group mb-3">
+             <a href="/Order/PlaceOrder/@Model.Id" class="btn btn-primary">Confirm</a>
+            </div>
+        
+    </div>
+</div>
+
+<div>
+   
+</div>
+

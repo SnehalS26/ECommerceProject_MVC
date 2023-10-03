@@ -14,5 +14,62 @@ html {
 }
 
 body {
-  margin-bottom: 60px;
+    margin-bottom: 60px;
+    background-color: lightgrey;
+}
+
+.carousel-inner{
+    position:relative;
+    top:10px;
+    height:900px;
+}
+.navbar {
+    background-color: #AAA6B0;
+}
+.border-top footer text-muted {
+    position: relative;
+    top: 700px;
+    background-color: #AAA6B0;
+}
+
+#comments{
+    width:415px;
+}
+.footer{
+    position: relative !important;
+    margin-top:60px;
+}
+.foot{
+    line-height: 30px;
+}
+.footer ul {
+    list-style: none;
+}
+
+.footer ul li {
+        font-weight: 300;
+        font-size: 18px;
+    }
+
+        .footer ul li a {
+            text-decoration: none;
+        }
+
+            .footer ul li a:hover {
+                text-decoration: underline
+            }
+.fa-facebook-official {
+    color: #104AE7;
+}
+
+.fa-twitter {
+    color: #104AE7;
+}
+
+.fa-whatsapp {
+    color: green;
+}
+
+.fa-instagram {
+    color: #DA21C1;
 }

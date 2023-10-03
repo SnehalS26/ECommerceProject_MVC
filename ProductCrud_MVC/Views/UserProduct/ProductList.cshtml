@@ -1,0 +1,57 @@
+﻿
+
+
+<h1>ProductList</h1>
+@model IEnumerable<ProductCrud_MVC.Models.Product>
+
+@{
+    ViewData["Title"] = "ProductList";
+    Pager pager = new Pager();
+    int pageNo = 0;
+
+    if (ViewBag.Pager != null)
+    {
+
+        pager = ViewBag.Pager;
+        pageNo = pager.CurrentPage;
+
+    }
+}
+<div class="container">
+    @if (pager.TotalPages > 0)
+    {
+        <ul class="pagination justify-content-end">
+            @for (var pge = pager.StartPage; pge <= pager.EndPage; pge++)
+            {
+                <li class="page-item @(pge == pager.CurrentPage ? "active" : "")">
+                    <a class="page-link" asp-controller="UserProduct" asp-action="ProductList" asp-route-pg="@pge"> @pge </a>
+                </li>
+            }
+        </ul>
+    }
+</div>
+
+    
+<div class="container">
+    <div class="row">
+        @foreach (var item in Model)
+        {
+            <div class="col-md-3">
+                <div class="card mb-3" style="width: 18rem;">
+                    <img src="@Url.Content(item.Imageurl)" class="card-img-top" alt="Item Image" style="height: 150px; width: 200px;">
+                    <div class="card-body">
+                        <h5 class="card-title">@Html.DisplayFor(modelItem => item.Name)</h5>
+                        <p class="card-text">Price: <i class="fa fa-inr" aria-hidden="true"></i> @Html.DisplayFor(modelItem => item.Price)</p>
+
+                        <a href="/UserProduct/AddToCart/@item.Id" class="btn btn-primary">Add To Cart</a>
+                        <a href="/Order/Orders/@item.Id" class="btn btn-warning">Buy now</a> <br />
+
+                        <a href="/UserProduct/SinglePage/@item.Id" class="card-link">View</a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+
